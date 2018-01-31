@@ -80,16 +80,16 @@ namespace myGOL
             //    mNeighborCount++;
             //}
 
-            for (int a = -1; a <= 1; y++)
-            {
-                for (int b = -1; b <= 1; b++)
-                {
-                    if (universe[x,y] == true && universe[x+b,y+a] == true)
-                    {
-                        mNeighborCount++;
-                    }
-                }
-            }
+            //for (int a = -1; a <= 1; y++)
+            //{
+            //    for (int b = -1; b <= 1; b++)
+            //    {
+            //        if (universe[x,y] == true && universe[x+b,y+a] == true)
+            //        {
+            //            mNeighborCount++;
+            //        }
+            //    }
+            //}
 
             return mNeighborCount;
         }
