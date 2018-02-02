@@ -69,6 +69,9 @@
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.aStripButtonPlay = new System.Windows.Forms.ToolStripButton();
+            this.aStripButtonPause = new System.Windows.Forms.ToolStripButton();
+            this.aStripButtonNext = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.aGraphicsPanel = new myGOL.MyGraphicsPanel();
             this.aStatusStrip.SuspendLayout();
@@ -80,9 +83,9 @@
             // 
             this.aStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aStripStatusGenerations});
-            this.aStatusStrip.Location = new System.Drawing.Point(0, 296);
+            this.aStatusStrip.Location = new System.Drawing.Point(0, 633);
             this.aStatusStrip.Name = "aStatusStrip";
-            this.aStatusStrip.Size = new System.Drawing.Size(519, 22);
+            this.aStatusStrip.Size = new System.Drawing.Size(1185, 22);
             this.aStatusStrip.TabIndex = 0;
             this.aStatusStrip.Text = "statusStrip1";
             // 
@@ -101,7 +104,7 @@
             this.helpToolStripMenuItem});
             this.aMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.aMenuStrip.Name = "aMenuStrip";
-            this.aMenuStrip.Size = new System.Drawing.Size(519, 24);
+            this.aMenuStrip.Size = new System.Drawing.Size(1185, 24);
             this.aMenuStrip.TabIndex = 1;
             this.aMenuStrip.Text = "menuStrip1";
             // 
@@ -315,10 +318,13 @@
             this.copyToolStripButton,
             this.pasteToolStripButton,
             this.toolStripSeparator6,
-            this.helpToolStripButton});
+            this.helpToolStripButton,
+            this.aStripButtonPlay,
+            this.aStripButtonPause,
+            this.aStripButtonNext});
             this.aToolStrip.Location = new System.Drawing.Point(0, 24);
             this.aToolStrip.Name = "aToolStrip";
-            this.aToolStrip.Size = new System.Drawing.Size(519, 25);
+            this.aToolStrip.Size = new System.Drawing.Size(1185, 25);
             this.aToolStrip.TabIndex = 2;
             this.aToolStrip.Text = "toolStrip1";
             // 
@@ -405,12 +411,42 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
+            // aStripButtonPlay
+            // 
+            this.aStripButtonPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aStripButtonPlay.Image = global::myGOL.Properties.Resources.PlayImage;
+            this.aStripButtonPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aStripButtonPlay.Name = "aStripButtonPlay";
+            this.aStripButtonPlay.Size = new System.Drawing.Size(23, 22);
+            this.aStripButtonPlay.Text = "aStripButtonPlay";
+            this.aStripButtonPlay.Click += new System.EventHandler(this.aStripButtonPlay_Click);
+            // 
+            // aStripButtonPause
+            // 
+            this.aStripButtonPause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aStripButtonPause.Image = ((System.Drawing.Image)(resources.GetObject("aStripButtonPause.Image")));
+            this.aStripButtonPause.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aStripButtonPause.Name = "aStripButtonPause";
+            this.aStripButtonPause.Size = new System.Drawing.Size(23, 22);
+            this.aStripButtonPause.Text = "aStripButtonPause";
+            this.aStripButtonPause.Click += new System.EventHandler(this.aStripButtonPause_Click);
+            // 
+            // aStripButtonNext
+            // 
+            this.aStripButtonNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.aStripButtonNext.Image = global::myGOL.Properties.Resources.NextImage;
+            this.aStripButtonNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.aStripButtonNext.Name = "aStripButtonNext";
+            this.aStripButtonNext.Size = new System.Drawing.Size(23, 22);
+            this.aStripButtonNext.Text = "aStripButtonNext";
+            this.aStripButtonNext.Click += new System.EventHandler(this.aStripButtonNext_Click);
+            // 
             // aGraphicsPanel
             // 
             this.aGraphicsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.aGraphicsPanel.Location = new System.Drawing.Point(0, 49);
             this.aGraphicsPanel.Name = "aGraphicsPanel";
-            this.aGraphicsPanel.Size = new System.Drawing.Size(519, 247);
+            this.aGraphicsPanel.Size = new System.Drawing.Size(1185, 584);
             this.aGraphicsPanel.TabIndex = 3;
             this.aGraphicsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.aGraphicsPanel_Paint);
             this.aGraphicsPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.aGraphicsPanel_MouseClick);
@@ -419,7 +455,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 318);
+            this.ClientSize = new System.Drawing.Size(1185, 655);
             this.Controls.Add(this.aGraphicsPanel);
             this.Controls.Add(this.aToolStrip);
             this.Controls.Add(this.aStatusStrip);
@@ -482,6 +518,9 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private MyGraphicsPanel aGraphicsPanel;
+        private System.Windows.Forms.ToolStripButton aStripButtonPlay;
+        private System.Windows.Forms.ToolStripButton aStripButtonPause;
+        private System.Windows.Forms.ToolStripButton aStripButtonNext;
     }
 }
 

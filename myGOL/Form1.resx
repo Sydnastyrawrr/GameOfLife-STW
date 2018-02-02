@@ -329,6 +329,15 @@
         E9ew//AVxE8OItv/9O/Cf0ck8gud2vKswuxNZgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="aStripButtonPause.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACNSURBVGhD7ddNCoAgAAXhzmZQB+4QrTqTbcUGf2ijMgNv
+        IwZ9S7c4eVXAdT9dy6M7pfXWBDj3vWn0A3+/ryUgnQAB0LqAED5nAgRA6wJgAgRAAgSUE5BOgABIgIBy
+        AtJNBTjgTIAASMCwgNkf9QJgAqh1AXAmQAAkYFQATYAAaAlAz/LoTmm9VQFjF+MLGMe5NQZApaAAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
   <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
