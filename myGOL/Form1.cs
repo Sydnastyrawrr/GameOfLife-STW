@@ -25,6 +25,16 @@ namespace myGOL
         //Generation Count
         int mGenerations = 0;
 
+        //Cell Count
+        int mCellCount = 0;
+
+        //Boundary Type
+        string mBoundaryType;
+
+        //Universe Size
+        int mWidth;
+        int mHeight;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +45,8 @@ namespace myGOL
             mTimer.Tick += MTimer_Tick;
 
             this.Text = Properties.Resources.AppTitle;
+
+            StatusandLabel();
         }
 
         private void MTimer_Tick(object sender, EventArgs e)
@@ -89,7 +101,6 @@ namespace myGOL
             bool[,] mScratchPad = new bool[20, 20];
 
             //Create the Next Generation
-            GenerationStatus();
             //Iterate Through the Universe in the Y, Top to Bottom
             for (int y = 0; y < mUniverse.GetLength(1); y++)
             {
@@ -127,7 +138,7 @@ namespace myGOL
             mUniverse = mScratchPad;
             //mScratchPad = temp;
             mGenerations++;
-
+            StatusandLabel();
 
             aGraphicsPanel.Invalidate();
         }
@@ -210,6 +221,7 @@ namespace myGOL
                 mUniverse[x, y] = !mUniverse[x, y];
 
                 aGraphicsPanel.Invalidate();
+                StatusandLabel();
             }
         }
 
@@ -227,19 +239,42 @@ namespace myGOL
 
             mTimer.Stop();
             mGenerations = 0;
-            GenerationStatus();
+            mCellCount = 0;
+            StatusandLabel();
             aGraphicsPanel.Invalidate();
         }
 
-        private void GenerationStatus()
+        private void StatusandLabel()
         {
+            mCellCount = 0;
+            mWidth = mUniverse.GetLength(0);
+            mHeight = mUniverse.GetLength(1);
+            for (int y = 0; y < mUniverse.GetLength(1); y++)
+            {
+                for (int x = 0; x < mUniverse.GetLength(0); x++)
+                {
+                    if (mUniverse[x, y] == true)
+                        mCellCount++;
+                }
+            }
+
+            //Strip Status
             aStripStatusGenerations.Text = "Generations: " + mGenerations.ToString();
+            aStripStatusCellCount.Text = "Cells: " + mCellCount.ToString();
+            aStripStatusBoundaryType.Text = "Boundary: " + mBoundaryType;
+
+            //Labels
+            aLabelGenerations.Text = "Generations: " + mGenerations.ToString();
+            aLabelCellCount.Text = "Cell Count: " + mCellCount.ToString();
+            aLabelBoundaryType.Text = "Boundary Type: " + mBoundaryType;
+            aLabelUniverseSize.Text = "Universe Size: {Width = " + mWidth.ToString() + ", Height = " + mHeight.ToString() + "}";
 
         }
 
         private void aStripButtonPause_Click(object sender, EventArgs e)
         {
             mTimer.Stop();
+            aStripButtonPause.Enabled = false;
         }
 
         private void aStripButtonNext_Click(object sender, EventArgs e)
@@ -250,8 +285,8 @@ namespace myGOL
         private void aStripButtonPlay_Click(object sender, EventArgs e)
         {
             mTimer.Start();
+            aStripButtonPause.Enabled = true;
         }
-
 
     }
 }
