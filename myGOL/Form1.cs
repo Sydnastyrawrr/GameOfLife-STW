@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace myGOL
 {
     public partial class Form1 : Form
@@ -185,6 +186,8 @@ namespace myGOL
                     //Outline the Cell With a Pen
                     e.Graphics.DrawRectangle(mGridPen, mCellRect.X, mCellRect.Y, mCellRect.Width, mCellRect.Height);
 
+
+
                     //Check Neighbors
                     int mNeighborCount = CountNeighbors(mUniverse, x, y);
                     if (mNeighborCount == 1)
@@ -275,6 +278,7 @@ namespace myGOL
         {
             mTimer.Stop();
             aStripButtonPause.Enabled = false;
+            aContextMenuPause.Enabled = false;
         }
 
         private void aStripButtonNext_Click(object sender, EventArgs e)
@@ -286,7 +290,39 @@ namespace myGOL
         {
             mTimer.Start();
             aStripButtonPause.Enabled = true;
+            aContextMenuPause.Enabled = true;
         }
 
+        private void aContextMenuStripItemHUDVisible_Click(object sender, EventArgs e)
+        {
+            if (aContextMenuStripItemHUDVisible.Checked == false)
+            {
+                aLabelBoundaryType.Visible = false;
+                aLabelCellCount.Visible = false;
+                aLabelGenerations.Visible = false;
+                aLabelUniverseSize.Visible = false;
+            }
+
+            else if (aContextMenuStripItemHUDVisible.Checked == true)
+            {
+                aLabelUniverseSize.Visible = true;
+                aLabelGenerations.Visible = true;
+                aLabelCellCount.Visible = true;
+                aLabelBoundaryType.Visible = true;
+            }
+        }
+
+        private void aContextMenuStripItemNeighborCount_Click(object sender, EventArgs e)
+        {
+            if (aContextMenuStripItemNeighborCount.Checked == true)
+            {
+                
+            }
+
+            else if (aContextMenuStripItemNeighborCount.Checked == false)
+            {
+
+            }
+        }
     }
 }

@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aStatusStrip = new System.Windows.Forms.StatusStrip();
             this.aStripStatusGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+            this.aStripStatusCellCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.aStripStatusBoundaryType = new System.Windows.Forms.ToolStripStatusLabel();
+            this.aStripStatusUniverseSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.aMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,13 +85,19 @@
             this.aLabelBoundaryType = new System.Windows.Forms.Label();
             this.aLabelCellCount = new System.Windows.Forms.Label();
             this.aLabelGenerations = new System.Windows.Forms.Label();
-            this.aStripStatusCellCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.aStripStatusBoundaryType = new System.Windows.Forms.ToolStripStatusLabel();
-            this.aStripStatusUniverseSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.aContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.aContextMenuClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.aContextMenuStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.aContextMenuPause = new System.Windows.Forms.ToolStripMenuItem();
+            this.aContextMenuNext = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aContextMenuStripItemHUDVisible = new System.Windows.Forms.ToolStripMenuItem();
+            this.aContextMenuStripItemNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
             this.aStatusStrip.SuspendLayout();
             this.aMenuStrip.SuspendLayout();
             this.aToolStrip.SuspendLayout();
             this.aGraphicsPanel.SuspendLayout();
+            this.aContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // aStatusStrip
@@ -108,6 +118,24 @@
             this.aStripStatusGenerations.Name = "aStripStatusGenerations";
             this.aStripStatusGenerations.Size = new System.Drawing.Size(70, 17);
             this.aStripStatusGenerations.Text = "Generations";
+            // 
+            // aStripStatusCellCount
+            // 
+            this.aStripStatusCellCount.Name = "aStripStatusCellCount";
+            this.aStripStatusCellCount.Size = new System.Drawing.Size(60, 17);
+            this.aStripStatusCellCount.Text = "CellCount";
+            // 
+            // aStripStatusBoundaryType
+            // 
+            this.aStripStatusBoundaryType.Name = "aStripStatusBoundaryType";
+            this.aStripStatusBoundaryType.Size = new System.Drawing.Size(83, 17);
+            this.aStripStatusBoundaryType.Text = "BoundaryType";
+            // 
+            // aStripStatusUniverseSize
+            // 
+            this.aStripStatusUniverseSize.Name = "aStripStatusUniverseSize";
+            this.aStripStatusUniverseSize.Size = new System.Drawing.Size(72, 17);
+            this.aStripStatusUniverseSize.Text = "UniverseSize";
             // 
             // aMenuStrip
             // 
@@ -542,29 +570,80 @@
             this.aLabelGenerations.TabIndex = 0;
             this.aLabelGenerations.Text = "Generations";
             // 
-            // aStripStatusCellCount
+            // aContextMenuStrip
             // 
-            this.aStripStatusCellCount.Name = "aStripStatusCellCount";
-            this.aStripStatusCellCount.Size = new System.Drawing.Size(60, 17);
-            this.aStripStatusCellCount.Text = "CellCount";
+            this.aContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aContextMenuClear,
+            this.aContextMenuStart,
+            this.aContextMenuPause,
+            this.aContextMenuNext,
+            this.optionsToolStripMenuItem1});
+            this.aContextMenuStrip.Name = "contextMenuStrip1";
+            this.aContextMenuStrip.Size = new System.Drawing.Size(153, 136);
             // 
-            // aStripStatusBoundaryType
+            // aContextMenuClear
             // 
-            this.aStripStatusBoundaryType.Name = "aStripStatusBoundaryType";
-            this.aStripStatusBoundaryType.Size = new System.Drawing.Size(83, 17);
-            this.aStripStatusBoundaryType.Text = "BoundaryType";
+            this.aContextMenuClear.Name = "aContextMenuClear";
+            this.aContextMenuClear.Size = new System.Drawing.Size(152, 22);
+            this.aContextMenuClear.Text = "Clear";
+            this.aContextMenuClear.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
-            // aStripStatusUniverseSize
+            // aContextMenuStart
             // 
-            this.aStripStatusUniverseSize.Name = "aStripStatusUniverseSize";
-            this.aStripStatusUniverseSize.Size = new System.Drawing.Size(72, 17);
-            this.aStripStatusUniverseSize.Text = "UniverseSize";
+            this.aContextMenuStart.Name = "aContextMenuStart";
+            this.aContextMenuStart.Size = new System.Drawing.Size(152, 22);
+            this.aContextMenuStart.Text = "Start";
+            this.aContextMenuStart.Click += new System.EventHandler(this.aStripButtonPlay_Click);
+            // 
+            // aContextMenuPause
+            // 
+            this.aContextMenuPause.Enabled = false;
+            this.aContextMenuPause.Name = "aContextMenuPause";
+            this.aContextMenuPause.Size = new System.Drawing.Size(152, 22);
+            this.aContextMenuPause.Text = "Pause";
+            this.aContextMenuPause.Click += new System.EventHandler(this.aStripButtonPause_Click);
+            // 
+            // aContextMenuNext
+            // 
+            this.aContextMenuNext.Name = "aContextMenuNext";
+            this.aContextMenuNext.Size = new System.Drawing.Size(152, 22);
+            this.aContextMenuNext.Text = "Next";
+            this.aContextMenuNext.Click += new System.EventHandler(this.aStripButtonNext_Click);
+            // 
+            // optionsToolStripMenuItem1
+            // 
+            this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aContextMenuStripItemHUDVisible,
+            this.aContextMenuStripItemNeighborCount});
+            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem1.Text = "Options";
+            // 
+            // aContextMenuStripItemHUDVisible
+            // 
+            this.aContextMenuStripItemHUDVisible.Checked = true;
+            this.aContextMenuStripItemHUDVisible.CheckOnClick = true;
+            this.aContextMenuStripItemHUDVisible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aContextMenuStripItemHUDVisible.Name = "aContextMenuStripItemHUDVisible";
+            this.aContextMenuStripItemHUDVisible.Size = new System.Drawing.Size(197, 22);
+            this.aContextMenuStripItemHUDVisible.Text = "Heads Up Visible";
+            this.aContextMenuStripItemHUDVisible.Click += new System.EventHandler(this.aContextMenuStripItemHUDVisible_Click);
+            // 
+            // aContextMenuStripItemNeighborCount
+            // 
+            this.aContextMenuStripItemNeighborCount.Checked = true;
+            this.aContextMenuStripItemNeighborCount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aContextMenuStripItemNeighborCount.Name = "aContextMenuStripItemNeighborCount";
+            this.aContextMenuStripItemNeighborCount.Size = new System.Drawing.Size(197, 22);
+            this.aContextMenuStripItemNeighborCount.Text = "Neighbor Count Visible";
+            this.aContextMenuStripItemNeighborCount.Click += new System.EventHandler(this.aContextMenuStripItemNeighborCount_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 655);
+            this.ContextMenuStrip = this.aContextMenuStrip;
             this.Controls.Add(this.aGraphicsPanel);
             this.Controls.Add(this.aToolStrip);
             this.Controls.Add(this.aStatusStrip);
@@ -580,6 +659,7 @@
             this.aToolStrip.PerformLayout();
             this.aGraphicsPanel.ResumeLayout(false);
             this.aGraphicsPanel.PerformLayout();
+            this.aContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -642,6 +722,14 @@
         private System.Windows.Forms.ToolStripStatusLabel aStripStatusCellCount;
         private System.Windows.Forms.ToolStripStatusLabel aStripStatusBoundaryType;
         private System.Windows.Forms.ToolStripStatusLabel aStripStatusUniverseSize;
+        private System.Windows.Forms.ContextMenuStrip aContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuClear;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuStart;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuPause;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuNext;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuStripItemHUDVisible;
+        private System.Windows.Forms.ToolStripMenuItem aContextMenuStripItemNeighborCount;
     }
 }
 
