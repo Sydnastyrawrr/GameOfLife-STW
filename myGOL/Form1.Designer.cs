@@ -85,11 +85,6 @@
             this.aStripButtonNext = new System.Windows.Forms.ToolStripButton();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.aGraphicsPanel = new myGOL.MyGraphicsPanel();
-            this.aLabelUniverseSize = new System.Windows.Forms.Label();
-            this.aLabelBoundaryType = new System.Windows.Forms.Label();
-            this.aLabelCellCount = new System.Windows.Forms.Label();
-            this.aLabelGenerations = new System.Windows.Forms.Label();
             this.aContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aContextMenuClear = new System.Windows.Forms.ToolStripMenuItem();
             this.aContextMenuStart = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,11 +94,16 @@
             this.aContextMenuStripItemGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.aContextMenuStripItemHUDVisible = new System.Windows.Forms.ToolStripMenuItem();
             this.aContextMenuStripItemNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
+            this.aGraphicsPanel = new myGOL.MyGraphicsPanel();
+            this.aLabelUniverseSize = new System.Windows.Forms.Label();
+            this.aLabelBoundaryType = new System.Windows.Forms.Label();
+            this.aLabelCellCount = new System.Windows.Forms.Label();
+            this.aLabelGenerations = new System.Windows.Forms.Label();
             this.aStatusStrip.SuspendLayout();
             this.aMenuStrip.SuspendLayout();
             this.aToolStrip.SuspendLayout();
-            this.aGraphicsPanel.SuspendLayout();
             this.aContextMenuStrip.SuspendLayout();
+            this.aGraphicsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // aStatusStrip
@@ -403,6 +403,7 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -561,8 +562,89 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
+            // aContextMenuStrip
+            // 
+            this.aContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aContextMenuClear,
+            this.aContextMenuStart,
+            this.aContextMenuPause,
+            this.aContextMenuNext,
+            this.optionsToolStripMenuItem1});
+            this.aContextMenuStrip.Name = "contextMenuStrip1";
+            this.aContextMenuStrip.Size = new System.Drawing.Size(117, 114);
+            // 
+            // aContextMenuClear
+            // 
+            this.aContextMenuClear.Name = "aContextMenuClear";
+            this.aContextMenuClear.Size = new System.Drawing.Size(116, 22);
+            this.aContextMenuClear.Text = "Clear";
+            this.aContextMenuClear.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // aContextMenuStart
+            // 
+            this.aContextMenuStart.Name = "aContextMenuStart";
+            this.aContextMenuStart.Size = new System.Drawing.Size(116, 22);
+            this.aContextMenuStart.Text = "Start";
+            this.aContextMenuStart.Click += new System.EventHandler(this.aStripButtonPlay_Click);
+            // 
+            // aContextMenuPause
+            // 
+            this.aContextMenuPause.Enabled = false;
+            this.aContextMenuPause.Name = "aContextMenuPause";
+            this.aContextMenuPause.Size = new System.Drawing.Size(116, 22);
+            this.aContextMenuPause.Text = "Pause";
+            this.aContextMenuPause.Click += new System.EventHandler(this.aStripButtonPause_Click);
+            // 
+            // aContextMenuNext
+            // 
+            this.aContextMenuNext.Name = "aContextMenuNext";
+            this.aContextMenuNext.Size = new System.Drawing.Size(116, 22);
+            this.aContextMenuNext.Text = "Next";
+            this.aContextMenuNext.Click += new System.EventHandler(this.aStripButtonNext_Click);
+            // 
+            // optionsToolStripMenuItem1
+            // 
+            this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aContextMenuStripItemGrid,
+            this.aContextMenuStripItemHUDVisible,
+            this.aContextMenuStripItemNeighborCount});
+            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem1.Text = "Options";
+            // 
+            // aContextMenuStripItemGrid
+            // 
+            this.aContextMenuStripItemGrid.Checked = true;
+            this.aContextMenuStripItemGrid.CheckOnClick = true;
+            this.aContextMenuStripItemGrid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aContextMenuStripItemGrid.Name = "aContextMenuStripItemGrid";
+            this.aContextMenuStripItemGrid.Size = new System.Drawing.Size(197, 22);
+            this.aContextMenuStripItemGrid.Text = "Grid Lines Visible";
+            this.aContextMenuStripItemGrid.Click += new System.EventHandler(this.aContextMenuStripItemGrid_Click);
+            // 
+            // aContextMenuStripItemHUDVisible
+            // 
+            this.aContextMenuStripItemHUDVisible.Checked = true;
+            this.aContextMenuStripItemHUDVisible.CheckOnClick = true;
+            this.aContextMenuStripItemHUDVisible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aContextMenuStripItemHUDVisible.Name = "aContextMenuStripItemHUDVisible";
+            this.aContextMenuStripItemHUDVisible.Size = new System.Drawing.Size(197, 22);
+            this.aContextMenuStripItemHUDVisible.Text = "Heads Up Visible";
+            this.aContextMenuStripItemHUDVisible.Click += new System.EventHandler(this.aContextMenuStripItemHUDVisible_Click);
+            // 
+            // aContextMenuStripItemNeighborCount
+            // 
+            this.aContextMenuStripItemNeighborCount.Checked = true;
+            this.aContextMenuStripItemNeighborCount.CheckOnClick = true;
+            this.aContextMenuStripItemNeighborCount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aContextMenuStripItemNeighborCount.Name = "aContextMenuStripItemNeighborCount";
+            this.aContextMenuStripItemNeighborCount.Size = new System.Drawing.Size(197, 22);
+            this.aContextMenuStripItemNeighborCount.Text = "Neighbor Count Visible";
+            this.aContextMenuStripItemNeighborCount.Click += new System.EventHandler(this.aContextMenuStripItemNeighborCount_Click);
+            // 
             // aGraphicsPanel
             // 
+            this.aGraphicsPanel.BackColor = System.Drawing.SystemColors.Control;
             this.aGraphicsPanel.Controls.Add(this.aLabelUniverseSize);
             this.aGraphicsPanel.Controls.Add(this.aLabelBoundaryType);
             this.aGraphicsPanel.Controls.Add(this.aLabelCellCount);
@@ -627,86 +709,6 @@
             this.aLabelGenerations.TabIndex = 0;
             this.aLabelGenerations.Text = "Generations";
             // 
-            // aContextMenuStrip
-            // 
-            this.aContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aContextMenuClear,
-            this.aContextMenuStart,
-            this.aContextMenuPause,
-            this.aContextMenuNext,
-            this.optionsToolStripMenuItem1});
-            this.aContextMenuStrip.Name = "contextMenuStrip1";
-            this.aContextMenuStrip.Size = new System.Drawing.Size(153, 136);
-            // 
-            // aContextMenuClear
-            // 
-            this.aContextMenuClear.Name = "aContextMenuClear";
-            this.aContextMenuClear.Size = new System.Drawing.Size(152, 22);
-            this.aContextMenuClear.Text = "Clear";
-            this.aContextMenuClear.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // aContextMenuStart
-            // 
-            this.aContextMenuStart.Name = "aContextMenuStart";
-            this.aContextMenuStart.Size = new System.Drawing.Size(152, 22);
-            this.aContextMenuStart.Text = "Start";
-            this.aContextMenuStart.Click += new System.EventHandler(this.aStripButtonPlay_Click);
-            // 
-            // aContextMenuPause
-            // 
-            this.aContextMenuPause.Enabled = false;
-            this.aContextMenuPause.Name = "aContextMenuPause";
-            this.aContextMenuPause.Size = new System.Drawing.Size(152, 22);
-            this.aContextMenuPause.Text = "Pause";
-            this.aContextMenuPause.Click += new System.EventHandler(this.aStripButtonPause_Click);
-            // 
-            // aContextMenuNext
-            // 
-            this.aContextMenuNext.Name = "aContextMenuNext";
-            this.aContextMenuNext.Size = new System.Drawing.Size(152, 22);
-            this.aContextMenuNext.Text = "Next";
-            this.aContextMenuNext.Click += new System.EventHandler(this.aStripButtonNext_Click);
-            // 
-            // optionsToolStripMenuItem1
-            // 
-            this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aContextMenuStripItemGrid,
-            this.aContextMenuStripItemHUDVisible,
-            this.aContextMenuStripItemNeighborCount});
-            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
-            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem1.Text = "Options";
-            // 
-            // aContextMenuStripItemGrid
-            // 
-            this.aContextMenuStripItemGrid.Checked = true;
-            this.aContextMenuStripItemGrid.CheckOnClick = true;
-            this.aContextMenuStripItemGrid.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.aContextMenuStripItemGrid.Name = "aContextMenuStripItemGrid";
-            this.aContextMenuStripItemGrid.Size = new System.Drawing.Size(197, 22);
-            this.aContextMenuStripItemGrid.Text = "Grid Lines Visible";
-            this.aContextMenuStripItemGrid.Click += new System.EventHandler(this.aContextMenuStripItemGrid_Click);
-            // 
-            // aContextMenuStripItemHUDVisible
-            // 
-            this.aContextMenuStripItemHUDVisible.Checked = true;
-            this.aContextMenuStripItemHUDVisible.CheckOnClick = true;
-            this.aContextMenuStripItemHUDVisible.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.aContextMenuStripItemHUDVisible.Name = "aContextMenuStripItemHUDVisible";
-            this.aContextMenuStripItemHUDVisible.Size = new System.Drawing.Size(197, 22);
-            this.aContextMenuStripItemHUDVisible.Text = "Heads Up Visible";
-            this.aContextMenuStripItemHUDVisible.Click += new System.EventHandler(this.aContextMenuStripItemHUDVisible_Click);
-            // 
-            // aContextMenuStripItemNeighborCount
-            // 
-            this.aContextMenuStripItemNeighborCount.Checked = true;
-            this.aContextMenuStripItemNeighborCount.CheckOnClick = true;
-            this.aContextMenuStripItemNeighborCount.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.aContextMenuStripItemNeighborCount.Name = "aContextMenuStripItemNeighborCount";
-            this.aContextMenuStripItemNeighborCount.Size = new System.Drawing.Size(197, 22);
-            this.aContextMenuStripItemNeighborCount.Text = "Neighbor Count Visible";
-            this.aContextMenuStripItemNeighborCount.Click += new System.EventHandler(this.aContextMenuStripItemNeighborCount_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,9 +728,9 @@
             this.aMenuStrip.PerformLayout();
             this.aToolStrip.ResumeLayout(false);
             this.aToolStrip.PerformLayout();
+            this.aContextMenuStrip.ResumeLayout(false);
             this.aGraphicsPanel.ResumeLayout(false);
             this.aGraphicsPanel.PerformLayout();
-            this.aContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

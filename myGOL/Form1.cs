@@ -13,8 +13,12 @@ namespace myGOL
 {
     public partial class Form1 : Form
     {
+        //Universe Size
+         int mWidth = 20;
+         int mHeight = 20;
+
         //The Universe Array
-        bool[,] mUniverse = new bool[20, 20];
+        bool[,] mUniverse;
 
         //Drawing Colors
         Color mGridColor = Color.Azure;
@@ -32,10 +36,6 @@ namespace myGOL
         //Boundary Type
         string mBoundaryType;
 
-        //Universe Size
-        int mWidth;
-        int mHeight;
-
         //To Draw Neighbors
         bool mDrawNeighbors = true;
 
@@ -45,6 +45,8 @@ namespace myGOL
         public Form1()
         {
             InitializeComponent();
+
+            mUniverse = new bool[mWidth, mHeight];
 
             //Set Timer
             mTimer.Interval = 200;
@@ -105,7 +107,7 @@ namespace myGOL
 
         private void NextGeneration()
         {
-            bool[,] mScratchPad = new bool[20, 20];
+            bool[,] mScratchPad = new bool[mWidth, mHeight];
 
             //Create the Next Generation
             //Iterate Through the Universe in the Y, Top to Bottom
@@ -422,6 +424,31 @@ namespace myGOL
                 mDrawGridLines = true;
                 aGraphicsPanel.Refresh();
             }
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OptionsDialog dlg = new OptionsDialog();
+
+            dlg.BackgroundColor = aGraphicsPanel.BackColor;
+            dlg.GridColor = mGridColor;
+            dlg.LiveCellColor = mCellColor;
+            dlg.GridWidth = mWidth;
+            dlg.GridHeight = mHeight;
+            dlg.TimeInterval = mTimer.Interval;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                mGridColor = dlg.GridColor;
+                mCellColor = dlg.LiveCellColor;
+                aGraphicsPanel.BackColor = dlg.BackgroundColor;
+                mWidth = dlg.GridWidth;
+                mHeight = dlg.GridHeight;
+                mUniverse = new bool[mWidth, mHeight];
+                mTimer.Interval = dlg.TimeInterval;
+            }
+
+            aGraphicsPanel.Refresh();
         }
     }
 }
