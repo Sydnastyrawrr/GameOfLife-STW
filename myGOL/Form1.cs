@@ -36,6 +36,9 @@ namespace myGOL
         int mWidth;
         int mHeight;
 
+        //To Draw Neighbors
+        bool mDrawNeighbors = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -188,18 +191,21 @@ namespace myGOL
 
 
 
-                    //Check Neighbors
-                    int mNeighborCount = CountNeighbors(mUniverse, x, y);
-                    if (mNeighborCount == 1)
+                    //Draw Neighbors
+                    if (mDrawNeighbors == true)
                     {
-                        e.Graphics.DrawString(CountNeighbors(mUniverse, x, y).ToString(), font, Brushes.Black, mCellRect, mStringFormat);
-                        //aGraphicsPanel.Invalidate();
+                        //Check Neighbors
+                        int mNeighborCount = CountNeighbors(mUniverse, x, y);
+                        if (mNeighborCount == 1)
+                        {
+                            e.Graphics.DrawString(CountNeighbors(mUniverse, x, y).ToString(), font, Brushes.Black, mCellRect, mStringFormat);
+                            //aGraphicsPanel.Invalidate();
+                        }
+                        if (mNeighborCount > 1)
+                        {
+                            e.Graphics.DrawString(CountNeighbors(mUniverse, x, y).ToString(), font, Brushes.CornflowerBlue, mCellRect, mStringFormat);
+                        }
                     }
-                    if (mNeighborCount > 1)
-                    {
-                        e.Graphics.DrawString(CountNeighbors(mUniverse, x, y).ToString(), font, Brushes.CornflowerBlue, mCellRect, mStringFormat);
-                    }
-
 
                 }
             }
@@ -297,6 +303,7 @@ namespace myGOL
         {
             if (aContextMenuStripItemHUDVisible.Checked == false)
             {
+                aToolStripHUD.Checked = false;
                 aLabelBoundaryType.Visible = false;
                 aLabelCellCount.Visible = false;
                 aLabelGenerations.Visible = false;
@@ -305,6 +312,8 @@ namespace myGOL
 
             else if (aContextMenuStripItemHUDVisible.Checked == true)
             {
+                aToolStripHUD.Checked = true;
+                aContextMenuStripItemHUDVisible.Checked = true;
                 aLabelUniverseSize.Visible = true;
                 aLabelGenerations.Visible = true;
                 aLabelCellCount.Visible = true;
@@ -314,14 +323,18 @@ namespace myGOL
 
         private void aContextMenuStripItemNeighborCount_Click(object sender, EventArgs e)
         {
-            if (aContextMenuStripItemNeighborCount.Checked == true)
+            if (aContextMenuStripItemNeighborCount.Checked == false)
             {
-                
+                aToolStripNeighborCount.Checked = false;
+                mDrawNeighbors = false;
+                aGraphicsPanel.Refresh();
             }
 
-            else if (aContextMenuStripItemNeighborCount.Checked == false)
+            else if (aContextMenuStripItemNeighborCount.Checked == true)
             {
-
+                aToolStripNeighborCount.Checked = true;
+                mDrawNeighbors = true;
+                aGraphicsPanel.Refresh();
             }
         }
 
@@ -333,6 +346,44 @@ namespace myGOL
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Reload();
+        }
+
+        private void aToolStripHUD_Click(object sender, EventArgs e)
+        {
+            if (aToolStripHUD.Checked == false)
+            {
+                aContextMenuStripItemHUDVisible.Checked = false;
+                aLabelBoundaryType.Visible = false;
+                aLabelCellCount.Visible = false;
+                aLabelGenerations.Visible = false;
+                aLabelUniverseSize.Visible = false;
+            }
+
+            else if (aToolStripHUD.Checked == true)
+            {
+                aContextMenuStripItemHUDVisible.Checked = true;
+                aLabelUniverseSize.Visible = true;
+                aLabelGenerations.Visible = true;
+                aLabelCellCount.Visible = true;
+                aLabelBoundaryType.Visible = true;
+            }
+        }
+
+        private void aToolStripNeighborCount_Click(object sender, EventArgs e)
+        {
+            if (aToolStripNeighborCount.Checked == false)
+            {
+                aContextMenuStripItemNeighborCount.Checked = false;
+                mDrawNeighbors = false;
+                aGraphicsPanel.Refresh();
+            }
+
+            else if (aToolStripNeighborCount.Checked == true)
+            {
+                aContextMenuStripItemNeighborCount.Checked = true;
+                mDrawNeighbors = true;
+                aGraphicsPanel.Refresh();
+            }
         }
     }
 }
