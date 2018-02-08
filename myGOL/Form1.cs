@@ -450,5 +450,45 @@ namespace myGOL
 
             aGraphicsPanel.Refresh();
         }
+
+        private void fromNewSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random rando = new Random();
+
+            int mRandomSeed = rando.Next(100000000, 1000000000);
+
+            RandomizeBySeed dlg = new RandomizeBySeed();
+
+            dlg.RandomizeSeed = mRandomSeed;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                mRandomSeed = dlg.RandomizeSeed;
+
+                mUniverse = new bool[mWidth, mHeight];
+                for (int y = 0; y < mUniverse.GetLength(1); y++)
+                {
+                    for (int x = 0; x < mUniverse.GetLength(0); x++)
+                    {
+                        if (mRandomSeed % 3 == 0)
+                        {
+                            mUniverse[x, y] = true;
+                        }
+                    }
+                }
+            }
+
+            aGraphicsPanel.Refresh();
+        }
+
+        private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
