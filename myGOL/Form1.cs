@@ -39,6 +39,9 @@ namespace myGOL
         //To Draw Neighbors
         bool mDrawNeighbors = true;
 
+        //To Draw Grid Lines
+        bool mDrawGridLines = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -186,9 +189,11 @@ namespace myGOL
                         e.Graphics.FillRectangle(mCellBrush, mCellRect);
                     }
 
-                    //Outline the Cell With a Pen
-                    e.Graphics.DrawRectangle(mGridPen, mCellRect.X, mCellRect.Y, mCellRect.Width, mCellRect.Height);
-
+                    if (mDrawGridLines == true)
+                    {
+                        //Outline the Cell With a Pen
+                        e.Graphics.DrawRectangle(mGridPen, mCellRect.X, mCellRect.Y, mCellRect.Width, mCellRect.Height);
+                    }
 
 
                     //Draw Neighbors
@@ -382,6 +387,39 @@ namespace myGOL
             {
                 aContextMenuStripItemNeighborCount.Checked = true;
                 mDrawNeighbors = true;
+                aGraphicsPanel.Refresh();
+            }
+        }
+
+        private void aToolStripGrid_Click(object sender, EventArgs e)
+        {
+            if (aToolStripGrid.Checked == false)
+            {
+                aContextMenuStripItemGrid.Checked = false;
+                mDrawGridLines = false;
+                aGraphicsPanel.Refresh();
+            }
+
+            else if (aToolStripGrid.Checked == true)
+            {
+                aContextMenuStripItemGrid.Checked = true;
+                mDrawGridLines = true;
+                aGraphicsPanel.Refresh();
+            }
+        }
+
+        private void aContextMenuStripItemGrid_Click(object sender, EventArgs e)
+        {
+            if (aContextMenuStripItemGrid.Checked == false)
+            {
+                aToolStripGrid.Checked = false;
+                mDrawGridLines = false;
+                aGraphicsPanel.Refresh();
+            }
+            else if (aContextMenuStripItemGrid.Checked == true)
+            {
+                aToolStripGrid.Checked = true;
+                mDrawGridLines = true;
                 aGraphicsPanel.Refresh();
             }
         }
