@@ -21,7 +21,7 @@ namespace myGOL
         {
             Random seed = new Random();
 
-            aUpDownSeedNum.Value = seed.Next(100000000, 1000000000);
+            aUpDownSeedNum.Value = seed.Next(0, 1000000000);
         }
 
         public int RandomizeSeed
@@ -35,6 +35,11 @@ namespace myGOL
             {
                 aUpDownSeedNum.Value = value;
             }
+        }
+
+        private void aUpDownSeedNum_ValueChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

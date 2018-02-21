@@ -73,19 +73,10 @@
             0,
             0,
             0});
-            this.aUpDownSeedNum.Minimum = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
             this.aUpDownSeedNum.Name = "aUpDownSeedNum";
             this.aUpDownSeedNum.Size = new System.Drawing.Size(99, 20);
             this.aUpDownSeedNum.TabIndex = 3;
-            this.aUpDownSeedNum.Value = new decimal(new int[] {
-            100000000,
-            0,
-            0,
-            0});
+            this.aUpDownSeedNum.ValueChanged += new System.EventHandler(this.aUpDownSeedNum_ValueChanged);
             // 
             // aButtonRandomize
             // 

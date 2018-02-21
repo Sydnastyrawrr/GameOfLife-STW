@@ -36,6 +36,9 @@ namespace myGOL
         //Boundary Type
         string mBoundaryType;
 
+        //Seed Number
+        int mSeed = System.DateTime.Now.Millisecond;
+
         //To Draw Neighbors
         bool mDrawNeighbors = true;
 
@@ -277,7 +280,9 @@ namespace myGOL
             //Strip Status
             aStripStatusGenerations.Text = "Generations: " + mGenerations.ToString();
             aStripStatusCellCount.Text = "Cells: " + mCellCount.ToString();
-            aStripStatusBoundaryType.Text = "Boundary: " + mBoundaryType;
+            // aStripStatusBoundaryType.Text = "Boundary: " + mBoundaryType.ToString();
+            aStripStatusUniverseSize.Text = "Universe Size - Width: " + mWidth + " Height: " + mHeight;
+            aStripStatusSeed.Text = "Seed: " + mSeed.ToString();
 
             //Labels
             aLabelGenerations.Text = "Generations: " + mGenerations.ToString();
@@ -449,28 +454,29 @@ namespace myGOL
             }
 
             aGraphicsPanel.Refresh();
+            StatusandLabel();
         }
 
         private void fromNewSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Random rando = new Random();
-
-            int mRandomSeed = rando.Next(100000000, 1000000000);
-
             RandomizeBySeed dlg = new RandomizeBySeed();
 
-            dlg.RandomizeSeed = mRandomSeed;
+            dlg.RandomizeSeed = mSeed;
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                mRandomSeed = dlg.RandomizeSeed;
+                mSeed = dlg.RandomizeSeed;
+
+                Random rando = new Random(dlg.RandomizeSeed);
 
                 mUniverse = new bool[mWidth, mHeight];
                 for (int y = 0; y < mUniverse.GetLength(1); y++)
                 {
                     for (int x = 0; x < mUniverse.GetLength(0); x++)
                     {
-                        if (mRandomSeed % 3 == 0)
+                        int mNewSeed = rando.Next(0, 2);
+
+                        if (mNewSeed % 2 == 0)
                         {
                             mUniverse[x, y] = true;
                         }
@@ -479,14 +485,61 @@ namespace myGOL
             }
 
             aGraphicsPanel.Refresh();
+            StatusandLabel();
         }
 
         private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Random rando = new Random(mSeed);
 
+            mUniverse = new bool[mWidth, mHeight];
+            for (int y = 0; y < mUniverse.GetLength(1); y++)
+            {
+                for (int x = 0; x < mUniverse.GetLength(0); x++)
+                {
+                    int mCurrentSeed = rando.Next(0,2);
+
+                    if (mCurrentSeed % 2 == 0)
+                    {
+                        mUniverse[x, y] = true;
+                    }
+
+                    else
+                        mUniverse[x, y] = false;
+                }
+            }
+
+            aGraphicsPanel.Refresh();
+            StatusandLabel();
         }
 
         private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mSeed = System.DateTime.Now.Millisecond;
+            Random rando = new Random(mSeed);
+
+            mUniverse = new bool[mWidth, mHeight];
+            for (int y = 0; y < mUniverse.GetLength(1); y ++)
+            {
+                for (int x = 0; x < mUniverse.GetLength(0); x++)
+                {
+                    int mCurrentSeed = rando.Next(0, 2);
+
+                    if (mCurrentSeed % 2 == 0)
+                    {
+                        mUniverse[x, y] = true;
+                    }
+
+                    else
+                        mUniverse[x, y] = false;
+                }
+            }
+
+            aGraphicsPanel.Refresh();
+            StatusandLabel();
+        }
+
+        private void aStripStatusUniverseSize_Click(object sender, EventArgs e)
         {
 
         }
