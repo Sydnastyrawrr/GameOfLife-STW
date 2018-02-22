@@ -61,9 +61,6 @@ namespace myGOL
             aButtonBackgroundColor.BackColor = Properties.Settings.Default.PanelColor; 
             aButtonGridColor.BackColor = Properties.Settings.Default.GridColor;
             aButtonLiveCellColor.BackColor = Properties.Settings.Default.CellColor;
-            aUpDownTime.Value = Properties.Settings.Default.IntervalTime;
-            aUpDownWidth.Value = Properties.Settings.Default.UniverseWidth;
-            aUpDownHeight.Value = Properties.Settings.Default.UniverseHeight;
         }
 
         public int TimeInterval
