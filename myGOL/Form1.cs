@@ -64,6 +64,15 @@ namespace myGOL
             this.Text = Properties.Resources.AppTitle;
 
             StatusandLabel();
+
+            //Read Settings
+            aGraphicsPanel.BackColor = Properties.Settings.Default.PanelColor;
+            mGridColor = Properties.Settings.Default.GridColor;
+            mCellColor = Properties.Settings.Default.GridColor;
+            mWidth = Properties.Settings.Default.UniverseWidth;
+            mHeight = Properties.Settings.Default.UniverseHeight;
+            mTimer.Interval = Properties.Settings.Default.IntervalTime;
+            
         }
 
         private void MTimer_Tick(object sender, EventArgs e)
@@ -748,6 +757,21 @@ namespace myGOL
 
             aGraphicsPanel.Refresh();
             StatusandLabel();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Update settings
+
+            Properties.Settings.Default.GridColor = mGridColor;
+            Properties.Settings.Default.PanelColor = aGraphicsPanel.BackColor;
+            Properties.Settings.Default.CellColor = mCellColor;
+            Properties.Settings.Default.UniverseWidth = mWidth;
+            Properties.Settings.Default.UniverseHeight = mHeight;
+            Properties.Settings.Default.IntervalTime = mTimer.Interval;
+
+
+            Properties.Settings.Default.Save();
         }
     }
 }

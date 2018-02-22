@@ -25,7 +25,67 @@ namespace myGOL.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fuchsia")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Azure")]
+        public global::System.Drawing.Color GridColor {
+            get {
+                return ((global::System.Drawing.Color)(this["GridColor"]));
+            }
+            set {
+                this["GridColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gray")]
+        public global::System.Drawing.Color CellColor {
+            get {
+                return ((global::System.Drawing.Color)(this["CellColor"]));
+            }
+            set {
+                this["CellColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int UniverseWidth {
+            get {
+                return ((int)(this["UniverseWidth"]));
+            }
+            set {
+                this["UniverseWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int UniverseHeight {
+            get {
+                return ((int)(this["UniverseHeight"]));
+            }
+            set {
+                this["UniverseHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int IntervalTime {
+            get {
+                return ((int)(this["IntervalTime"]));
+            }
+            set {
+                this["IntervalTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Control")]
         public global::System.Drawing.Color PanelColor {
             get {
                 return ((global::System.Drawing.Color)(this["PanelColor"]));

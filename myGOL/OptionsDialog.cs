@@ -55,9 +55,15 @@ namespace myGOL
 
         private void aButtonReset_Click(object sender, EventArgs e)
         {
-            aButtonBackgroundColor.BackColor = SystemColors.Control; 
-            aButtonGridColor.BackColor = Color.Azure;
-            aButtonLiveCellColor.BackColor = Color.Gray;
+            Properties.Settings.Default.Reset();
+
+            //Read Settings
+            aButtonBackgroundColor.BackColor = Properties.Settings.Default.PanelColor; 
+            aButtonGridColor.BackColor = Properties.Settings.Default.GridColor;
+            aButtonLiveCellColor.BackColor = Properties.Settings.Default.CellColor;
+            aUpDownTime.Value = Properties.Settings.Default.IntervalTime;
+            aUpDownWidth.Value = Properties.Settings.Default.UniverseWidth;
+            aUpDownHeight.Value = Properties.Settings.Default.UniverseHeight;
         }
 
         public int TimeInterval

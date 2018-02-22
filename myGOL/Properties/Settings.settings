@@ -2,8 +2,23 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="myGOL.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
+    <Setting Name="GridColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Azure</Value>
+    </Setting>
+    <Setting Name="CellColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Gray</Value>
+    </Setting>
+    <Setting Name="UniverseWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="UniverseHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="IntervalTime" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
     <Setting Name="PanelColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Fuchsia</Value>
+      <Value Profile="(Default)">Control</Value>
     </Setting>
   </Settings>
 </SettingsFile>
