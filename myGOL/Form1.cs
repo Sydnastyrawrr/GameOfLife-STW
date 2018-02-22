@@ -39,7 +39,7 @@ namespace myGOL
 
         //Boundary Type
         string mBoundaryType = "Finite";
-        int BoundaryType = 1;
+        bool BoundaryType = true;
 
         //Seed Number
         int mSeed = System.DateTime.Now.Millisecond;
@@ -54,6 +54,16 @@ namespace myGOL
         {
             InitializeComponent();
 
+            //Read Settings
+            aGraphicsPanel.BackColor = Properties.Settings.Default.PanelColor;
+            mGridColor = Properties.Settings.Default.GridColor;
+            mCellColor = Properties.Settings.Default.GridColor;
+            mWidth = Properties.Settings.Default.UniverseWidth;
+            mHeight = Properties.Settings.Default.UniverseHeight;
+            mTimer.Interval = Properties.Settings.Default.IntervalTime;
+            BoundaryType = Properties.Settings.Default.BoundaryType;
+
+            //Setting Universe
             mUniverse = new bool[mWidth, mHeight];
 
             //Set Timer
@@ -64,15 +74,6 @@ namespace myGOL
             this.Text = Properties.Resources.AppTitle;
 
             StatusandLabel();
-
-            //Read Settings
-            aGraphicsPanel.BackColor = Properties.Settings.Default.PanelColor;
-            mGridColor = Properties.Settings.Default.GridColor;
-            mCellColor = Properties.Settings.Default.GridColor;
-            mWidth = Properties.Settings.Default.UniverseWidth;
-            mHeight = Properties.Settings.Default.UniverseHeight;
-            mTimer.Interval = Properties.Settings.Default.IntervalTime;
-            
         }
 
         private void MTimer_Tick(object sender, EventArgs e)
@@ -321,6 +322,16 @@ namespace myGOL
                 }
             }
 
+            if (BoundaryType == true)
+            {
+                mBoundaryType = "Finite";
+            }
+
+            if (BoundaryType == false)
+            {
+                mBoundaryType = "Toroidal";
+            }
+
             //Strip Status
             aStripStatusGenerations.Text = "Generations: " + mGenerations.ToString();
             aStripStatusCellCount.Text = "Cells: " + mCellCount.ToString();
@@ -498,14 +509,14 @@ namespace myGOL
                 mUniverse = new bool[mWidth, mHeight];
                 mTimer.Interval = dlg.TimeInterval;
                 BoundaryType = dlg.BoundaryType;
-                if (BoundaryType == 0)
-                {
-                    mBoundaryType = "Toroidal";
-                }
-
-                if (BoundaryType == 1)
+                if (BoundaryType == true)
                 {
                     mBoundaryType = "Finite";
+                }
+
+                if (BoundaryType == false)
+                {
+                    mBoundaryType = "Toroidal";
                 }
             }
 
@@ -769,6 +780,7 @@ namespace myGOL
             Properties.Settings.Default.UniverseWidth = mWidth;
             Properties.Settings.Default.UniverseHeight = mHeight;
             Properties.Settings.Default.IntervalTime = mTimer.Interval;
+            Properties.Settings.Default.BoundaryType = BoundaryType;
 
 
             Properties.Settings.Default.Save();

@@ -94,5 +94,17 @@ namespace myGOL.Properties {
                 this["PanelColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BoundaryType {
+            get {
+                return ((bool)(this["BoundaryType"]));
+            }
+            set {
+                this["BoundaryType"] = value;
+            }
+        }
     }
 }

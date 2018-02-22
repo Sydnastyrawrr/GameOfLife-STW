@@ -20,5 +20,8 @@
     <Setting Name="PanelColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Control</Value>
     </Setting>
+    <Setting Name="BoundaryType" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

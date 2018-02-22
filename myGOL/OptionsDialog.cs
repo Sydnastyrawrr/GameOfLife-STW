@@ -61,6 +61,10 @@ namespace myGOL
             aButtonBackgroundColor.BackColor = Properties.Settings.Default.PanelColor; 
             aButtonGridColor.BackColor = Properties.Settings.Default.GridColor;
             aButtonLiveCellColor.BackColor = Properties.Settings.Default.CellColor;
+            aUpDownTime.Value = Properties.Settings.Default.IntervalTime;
+            aUpDownWidth.Value = Properties.Settings.Default.UniverseWidth;
+            aUpDownHeight.Value = Properties.Settings.Default.UniverseHeight;
+            aRadioButtonFinite.Checked = Properties.Settings.Default.BoundaryType;
         }
 
         public int TimeInterval
@@ -140,25 +144,30 @@ namespace myGOL
             }
         }
 
-        public int BoundaryType
+        public bool BoundaryType
         {
             get
             {
-                if (aRadioButtonFinite.Checked) return 1;
-                if (aRadioButtonToroidal.Checked) return 0;
-                else return 1;
+                if (aRadioButtonFinite.Checked) return true;
+                if (aRadioButtonToroidal.Checked) return false;
+                else return true;
             }
 
             set
             {
-                if (value == 0) aRadioButtonToroidal.Checked = true;
-                if (value == 1) aRadioButtonFinite.Checked = true;
+                if (value == false) aRadioButtonToroidal.Checked = true;
+                if (value == true) aRadioButtonFinite.Checked = true;
             }
         }
 
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void aRadioButtonFinite_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
