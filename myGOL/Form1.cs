@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +15,14 @@ namespace myGOL
     public partial class Form1 : Form
     {
         //Universe Size
-         int mWidth = 20;
-         int mHeight = 20;
+         int mWidth = 30;
+         int mHeight = 30;
 
         //The Universe Array
         bool[,] mUniverse;
+
+        //The Scratch Pad;
+        bool[,] mScratchPad;
 
         //Drawing Colors
         Color mGridColor = Color.Azure;
@@ -34,7 +38,8 @@ namespace myGOL
         int mCellCount = 0;
 
         //Boundary Type
-        string mBoundaryType;
+        string mBoundaryType = "Finite";
+        int BoundaryType = 1;
 
         //Seed Number
         int mSeed = System.DateTime.Now.Millisecond;
@@ -71,46 +76,76 @@ namespace myGOL
         {
             int mNeighborCount = 0;
 
-            if (y - 1 >=0 && universe[x, y - 1] == true)
+            for (int mY = -1; mY <= 1; mY++)
             {
-                mNeighborCount++;
-            }
-            if (x + 1 < universe.GetLength(0) && y - 1 >= 0 && universe[x + 1, y - 1] == true)
-            {
-                mNeighborCount++;
-            }
-            if (x + 1 < universe.GetLength(0) && universe[x + 1, y] == true)
-            {
-                mNeighborCount++;
-            }
-            if (y + 1 < universe.GetLength(1) && universe[x, y + 1] == true)
-            {
-                mNeighborCount++;
-            }
-            if (x - 1 >= 0 && y - 1 >= 0 && universe[x - 1, y - 1] == true)
-            {
-                mNeighborCount++;
-            }
-            if (x + 1 < universe.GetLength(0) && y + 1 < universe.GetLength(1) && universe[x + 1, y + 1] == true)
-            {
-                mNeighborCount++;
-            }
-            if (x - 1 >= 0 && universe[x - 1, y] == true)
-            {
-                mNeighborCount++;
-            }
-            if (x - 1 >= 0 && y + 1 < universe.GetLength(1) && universe[x - 1, y + 1] == true)
-            {
-                mNeighborCount++;
-            }
+                for (int mX = -1; mX <= 1; mX++)
+                {
+                    int nY = y + mY;
+                    int nX = x + mX;
+
+                    if (nY == -1)
+                    {
+                        if (mBoundaryType.ToLower() == "toroidal")
+                        {
+                            nY = universe.GetLength(1) - 1;
+                        }
+
+                        else
+                            continue;
+                    }
+
+                    if (nY == universe.GetLength(1))
+                    {
+                        if (mBoundaryType.ToLower() == "toroidal")
+                        {
+                            nY = 0;
+                        }
+
+                        else
+                            continue;
+                    }
+
+                    if (nX == universe.GetLength(0))
+                    {
+                        if (mBoundaryType.ToLower() == "toroidal")
+                        {
+                            nX = 0;
+                        }
+
+                        else
+                            continue;
+                    }
+
+                    if (nX == -1)
+                    {
+                        if (mBoundaryType.ToLower() == "toroidal")
+                        {
+                            nX = universe.GetLength(0) -1;
+                        }
+
+                        else
+                            continue;
+                    }
+
+                    if (mY == 0 && mX == 0)
+                    {
+                        continue;
+                    }
+
+                    if (universe[nX,nY] == true)
+                    {
+                        mNeighborCount++;
+                    }
 
 
+                }
+            }
             return mNeighborCount;
         }
 
         private void NextGeneration()
         {
-            bool[,] mScratchPad = new bool[mWidth, mHeight];
+             mScratchPad = new bool[mUniverse.GetLength(0), mUniverse.GetLength(1)];
 
             //Create the Next Generation
             //Iterate Through the Universe in the Y, Top to Bottom
@@ -234,8 +269,8 @@ namespace myGOL
                 float mCellWidth = (float)aGraphicsPanel.ClientSize.Width / mUniverse.GetLength(0);
                 float mCellHeight = (float)aGraphicsPanel.ClientSize.Height / mUniverse.GetLength(1);
 
-                int x = e.X / (int)mCellWidth;
-                int y = e.Y / (int)mCellHeight;
+                int x = (int)(e.X / mCellWidth);
+                int y = (int)(e.Y / mCellHeight);
 
                 mUniverse[x, y] = !mUniverse[x, y];
 
@@ -280,7 +315,7 @@ namespace myGOL
             //Strip Status
             aStripStatusGenerations.Text = "Generations: " + mGenerations.ToString();
             aStripStatusCellCount.Text = "Cells: " + mCellCount.ToString();
-            // aStripStatusBoundaryType.Text = "Boundary: " + mBoundaryType.ToString();
+            aStripStatusBoundaryType.Text = "Boundary: " + mBoundaryType.ToString();
             aStripStatusUniverseSize.Text = "Universe Size - Width: " + mWidth + " Height: " + mHeight;
             aStripStatusSeed.Text = "Seed: " + mSeed.ToString();
 
@@ -433,6 +468,7 @@ namespace myGOL
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            mTimer.Stop();
             OptionsDialog dlg = new OptionsDialog();
 
             dlg.BackgroundColor = aGraphicsPanel.BackColor;
@@ -441,6 +477,7 @@ namespace myGOL
             dlg.GridWidth = mWidth;
             dlg.GridHeight = mHeight;
             dlg.TimeInterval = mTimer.Interval;
+            dlg.BoundaryType = BoundaryType;
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
@@ -451,6 +488,16 @@ namespace myGOL
                 mHeight = dlg.GridHeight;
                 mUniverse = new bool[mWidth, mHeight];
                 mTimer.Interval = dlg.TimeInterval;
+                BoundaryType = dlg.BoundaryType;
+                if (BoundaryType == 0)
+                {
+                    mBoundaryType = "Toroidal";
+                }
+
+                if (BoundaryType == 1)
+                {
+                    mBoundaryType = "Finite";
+                }
             }
 
             aGraphicsPanel.Refresh();
@@ -542,6 +589,165 @@ namespace myGOL
         private void aStripStatusUniverseSize_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamReader reader = new StreamReader(dlg.FileName);
+
+                int mMaxWidth = 0;
+                int mMaxHeight = 0;
+
+                while (!reader.EndOfStream)
+                {
+                    string row = reader.ReadLine();
+
+                    if (row[0] == '!')
+                    {
+                        continue;
+                    }
+
+                    else
+                    {
+                        mMaxHeight ++;
+                    }
+
+                    mMaxWidth = row.Length;
+                }
+
+                mWidth = mMaxWidth;
+                mHeight = mMaxHeight;
+
+                mUniverse = new bool[mMaxWidth, mMaxHeight];
+
+                reader.BaseStream.Seek(0, SeekOrigin.Begin);
+
+                int rowcount = 0;
+
+                while (!reader.EndOfStream)
+                {
+                    string row = reader.ReadLine();
+
+                    if (row[0] == '!')
+                    {
+                        continue;
+                    }
+
+                    else
+                    {
+                        for (int xPos = 0; xPos < row.Length; xPos++)
+                        {
+                            if(row[xPos] == 'O')
+                            {
+                                mUniverse[xPos,rowcount] = true;
+                            }
+
+                            if(row[xPos] == '.')
+                            {
+                                mUniverse[xPos,rowcount] = false;
+                            }
+                        }
+
+                        rowcount++;
+                    }
+                }
+
+                reader.Close();
+            }
+
+            aGraphicsPanel.Refresh();
+            StatusandLabel();
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+                writer.WriteLine("!Sydney's Game of Life.");
+
+                //Iterate through the universe one row at a time
+                for (int y = 0; y <mUniverse.GetLength(1); y++)
+                {
+                    //String to represent the current row
+                    String oCurrentRow = string.Empty;
+
+                    //Iterate through the current row one cell at a time
+                    for (int x = 0; x < mUniverse.GetLength(0); x++)
+                    {
+                        if (mUniverse[x,y] == true)
+                        {
+                            oCurrentRow += 'O';
+                        }
+
+                        else
+                        {
+                            oCurrentRow += '.';
+                        }
+                    }
+
+                    writer.WriteLine(oCurrentRow);
+                }
+
+                writer.Close();
+            }
+        }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamReader reader = new StreamReader(dlg.FileName);
+
+                int rowcount = 0;
+
+                while (!reader.EndOfStream)
+                {
+                    string row = reader.ReadLine();
+
+                    if (row[0] == '!')
+                    {
+                        continue;
+                    }
+
+                    else
+                    {
+                        for (int xPos = 0; xPos < row.Length; xPos++)
+                        {
+                            if (row[xPos] == 'O')
+                            {
+                                mUniverse[xPos, rowcount] = true;
+                            }
+
+                            if (row[xPos] == '.')
+                            {
+                                mUniverse[xPos, rowcount] = false;
+                            }
+                        }
+
+                        rowcount++;
+                    }
+                }
+
+                reader.Close();
+            }
+
+            aGraphicsPanel.Refresh();
+            StatusandLabel();
         }
     }
 }

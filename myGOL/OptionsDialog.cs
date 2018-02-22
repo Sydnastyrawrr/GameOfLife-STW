@@ -137,6 +137,25 @@ namespace myGOL
             }
         }
 
+        public int BoundaryType
+        {
+            get
+            {
+                if (aRadioButtonFinite.Checked) return 1;
+                if (aRadioButtonToroidal.Checked) return 0;
+                else return 1;
+            }
 
+            set
+            {
+                if (value == 0) aRadioButtonToroidal.Checked = true;
+                if (value == 1) aRadioButtonFinite.Checked = true;
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

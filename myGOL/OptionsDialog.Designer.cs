@@ -47,12 +47,21 @@
             this.aButtonBackgroundColor = new System.Windows.Forms.Button();
             this.aButtonGridColor = new System.Windows.Forms.Button();
             this.aTabPageAdvanced = new System.Windows.Forms.TabPage();
+            this.aGroupBoxBoundary = new System.Windows.Forms.GroupBox();
+            this.aRadioButtonToroidal = new System.Windows.Forms.RadioButton();
+            this.aRadioButtonFinite = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.aTabControl.SuspendLayout();
             this.aTabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aUpDownTime)).BeginInit();
             this.aTabPageView.SuspendLayout();
+            this.aTabPageAdvanced.SuspendLayout();
+            this.aGroupBoxBoundary.SuspendLayout();
             this.SuspendLayout();
             // 
             // aButtonOK
@@ -239,12 +248,91 @@
             // 
             // aTabPageAdvanced
             // 
+            this.aTabPageAdvanced.Controls.Add(this.aGroupBoxBoundary);
             this.aTabPageAdvanced.Location = new System.Drawing.Point(4, 22);
             this.aTabPageAdvanced.Name = "aTabPageAdvanced";
             this.aTabPageAdvanced.Size = new System.Drawing.Size(322, 206);
             this.aTabPageAdvanced.TabIndex = 2;
             this.aTabPageAdvanced.Text = "Advanced";
             this.aTabPageAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // aGroupBoxBoundary
+            // 
+            this.aGroupBoxBoundary.Controls.Add(this.label10);
+            this.aGroupBoxBoundary.Controls.Add(this.label9);
+            this.aGroupBoxBoundary.Controls.Add(this.label8);
+            this.aGroupBoxBoundary.Controls.Add(this.label5);
+            this.aGroupBoxBoundary.Controls.Add(this.aRadioButtonFinite);
+            this.aGroupBoxBoundary.Controls.Add(this.aRadioButtonToroidal);
+            this.aGroupBoxBoundary.Location = new System.Drawing.Point(59, 56);
+            this.aGroupBoxBoundary.Name = "aGroupBoxBoundary";
+            this.aGroupBoxBoundary.Size = new System.Drawing.Size(200, 100);
+            this.aGroupBoxBoundary.TabIndex = 0;
+            this.aGroupBoxBoundary.TabStop = false;
+            this.aGroupBoxBoundary.Text = "Boundary Type";
+            // 
+            // aRadioButtonToroidal
+            // 
+            this.aRadioButtonToroidal.AutoSize = true;
+            this.aRadioButtonToroidal.Location = new System.Drawing.Point(6, 19);
+            this.aRadioButtonToroidal.Name = "aRadioButtonToroidal";
+            this.aRadioButtonToroidal.Size = new System.Drawing.Size(63, 17);
+            this.aRadioButtonToroidal.TabIndex = 0;
+            this.aRadioButtonToroidal.Text = "Toroidal";
+            this.aRadioButtonToroidal.UseVisualStyleBackColor = true;
+            // 
+            // aRadioButtonFinite
+            // 
+            this.aRadioButtonFinite.AutoSize = true;
+            this.aRadioButtonFinite.Checked = true;
+            this.aRadioButtonFinite.Location = new System.Drawing.Point(6, 51);
+            this.aRadioButtonFinite.Name = "aRadioButtonFinite";
+            this.aRadioButtonFinite.Size = new System.Drawing.Size(50, 17);
+            this.aRadioButtonFinite.TabIndex = 1;
+            this.aRadioButtonFinite.TabStop = true;
+            this.aRadioButtonFinite.Text = "Finite";
+            this.aRadioButtonFinite.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(95, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Warning!";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(95, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Changing boundary";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(95, 46);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "type may erase";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(95, 59);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "current cells";
             // 
             // OptionsDialog
             // 
@@ -270,6 +358,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.aUpDownTime)).EndInit();
             this.aTabPageView.ResumeLayout(false);
             this.aTabPageView.PerformLayout();
+            this.aTabPageAdvanced.ResumeLayout(false);
+            this.aGroupBoxBoundary.ResumeLayout(false);
+            this.aGroupBoxBoundary.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -295,5 +386,12 @@
         private System.Windows.Forms.Button aButtonBackgroundColor;
         private System.Windows.Forms.Button aButtonGridColor;
         private System.Windows.Forms.TabPage aTabPageAdvanced;
+        private System.Windows.Forms.GroupBox aGroupBoxBoundary;
+        private System.Windows.Forms.RadioButton aRadioButtonFinite;
+        private System.Windows.Forms.RadioButton aRadioButtonToroidal;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -41,7 +41,6 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,12 +96,14 @@
             this.aContextMenuStripItemGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.aContextMenuStripItemHUDVisible = new System.Windows.Forms.ToolStripMenuItem();
             this.aContextMenuStripItemNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
+            this.aStripStatusSeed = new System.Windows.Forms.ToolStripStatusLabel();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.aGraphicsPanel = new myGOL.MyGraphicsPanel();
             this.aLabelUniverseSize = new System.Windows.Forms.Label();
             this.aLabelBoundaryType = new System.Windows.Forms.Label();
             this.aLabelCellCount = new System.Windows.Forms.Label();
             this.aLabelGenerations = new System.Windows.Forms.Label();
-            this.aStripStatusSeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.aStatusStrip.SuspendLayout();
             this.aMenuStrip.SuspendLayout();
             this.aToolStrip.SuspendLayout();
@@ -118,9 +119,9 @@
             this.aStripStatusBoundaryType,
             this.aStripStatusUniverseSize,
             this.aStripStatusSeed});
-            this.aStatusStrip.Location = new System.Drawing.Point(0, 633);
+            this.aStatusStrip.Location = new System.Drawing.Point(0, 587);
             this.aStatusStrip.Name = "aStatusStrip";
-            this.aStatusStrip.Size = new System.Drawing.Size(1185, 22);
+            this.aStatusStrip.Size = new System.Drawing.Size(675, 22);
             this.aStatusStrip.TabIndex = 0;
             this.aStatusStrip.Text = "statusStrip1";
             // 
@@ -160,7 +161,7 @@
             this.helpToolStripMenuItem});
             this.aMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.aMenuStrip.Name = "aMenuStrip";
-            this.aMenuStrip.Size = new System.Drawing.Size(1185, 24);
+            this.aMenuStrip.Size = new System.Drawing.Size(675, 24);
             this.aMenuStrip.TabIndex = 1;
             this.aMenuStrip.Text = "menuStrip1";
             // 
@@ -171,8 +172,9 @@
             this.openToolStripMenuItem,
             this.toolStripSeparator,
             this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
+            this.importToolStripMenuItem,
+            this.toolStripSeparator6,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -196,6 +198,7 @@
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -210,12 +213,7 @@
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -398,7 +396,7 @@
             this.fromCurrentSeedToolStripMenuItem,
             this.fromNewSeedToolStripMenuItem});
             this.randomizeToolStripMenuItem.Name = "randomizeToolStripMenuItem";
-            this.randomizeToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.randomizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.randomizeToolStripMenuItem.Text = "Randomize";
             // 
             // fromTimeToolStripMenuItem
@@ -426,13 +424,13 @@
             // 
             this.customizeToolStripMenuItem.Enabled = false;
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.customizeToolStripMenuItem.Text = "&Customize";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -442,7 +440,7 @@
             this.resetToolStripMenuItem,
             this.reloadToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // resetToolStripMenuItem
@@ -516,7 +514,7 @@
             this.helpToolStripButton});
             this.aToolStrip.Location = new System.Drawing.Point(0, 24);
             this.aToolStrip.Name = "aToolStrip";
-            this.aToolStrip.Size = new System.Drawing.Size(1185, 25);
+            this.aToolStrip.Size = new System.Drawing.Size(675, 25);
             this.aToolStrip.TabIndex = 2;
             this.aToolStrip.Text = "toolStrip1";
             // 
@@ -538,6 +536,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // saveToolStripButton
             // 
@@ -547,6 +546,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -673,6 +673,24 @@
             this.aContextMenuStripItemNeighborCount.Text = "Neighbor Count Visible";
             this.aContextMenuStripItemNeighborCount.Click += new System.EventHandler(this.aContextMenuStripItemNeighborCount_Click);
             // 
+            // aStripStatusSeed
+            // 
+            this.aStripStatusSeed.Name = "aStripStatusSeed";
+            this.aStripStatusSeed.Size = new System.Drawing.Size(32, 17);
+            this.aStripStatusSeed.Text = "Seed";
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(143, 6);
+            // 
             // aGraphicsPanel
             // 
             this.aGraphicsPanel.BackColor = System.Drawing.SystemColors.Control;
@@ -683,7 +701,7 @@
             this.aGraphicsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.aGraphicsPanel.Location = new System.Drawing.Point(0, 49);
             this.aGraphicsPanel.Name = "aGraphicsPanel";
-            this.aGraphicsPanel.Size = new System.Drawing.Size(1185, 584);
+            this.aGraphicsPanel.Size = new System.Drawing.Size(675, 538);
             this.aGraphicsPanel.TabIndex = 3;
             this.aGraphicsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.aGraphicsPanel_Paint);
             this.aGraphicsPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.aGraphicsPanel_MouseClick);
@@ -695,7 +713,7 @@
             this.aLabelUniverseSize.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.aLabelUniverseSize.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aLabelUniverseSize.ForeColor = System.Drawing.Color.SteelBlue;
-            this.aLabelUniverseSize.Location = new System.Drawing.Point(0, 512);
+            this.aLabelUniverseSize.Location = new System.Drawing.Point(0, 466);
             this.aLabelUniverseSize.Name = "aLabelUniverseSize";
             this.aLabelUniverseSize.Size = new System.Drawing.Size(100, 18);
             this.aLabelUniverseSize.TabIndex = 3;
@@ -708,7 +726,7 @@
             this.aLabelBoundaryType.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.aLabelBoundaryType.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aLabelBoundaryType.ForeColor = System.Drawing.Color.SteelBlue;
-            this.aLabelBoundaryType.Location = new System.Drawing.Point(0, 530);
+            this.aLabelBoundaryType.Location = new System.Drawing.Point(0, 484);
             this.aLabelBoundaryType.Name = "aLabelBoundaryType";
             this.aLabelBoundaryType.Size = new System.Drawing.Size(114, 18);
             this.aLabelBoundaryType.TabIndex = 2;
@@ -721,7 +739,7 @@
             this.aLabelCellCount.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.aLabelCellCount.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aLabelCellCount.ForeColor = System.Drawing.Color.SteelBlue;
-            this.aLabelCellCount.Location = new System.Drawing.Point(0, 548);
+            this.aLabelCellCount.Location = new System.Drawing.Point(0, 502);
             this.aLabelCellCount.Name = "aLabelCellCount";
             this.aLabelCellCount.Size = new System.Drawing.Size(76, 18);
             this.aLabelCellCount.TabIndex = 1;
@@ -734,23 +752,17 @@
             this.aLabelGenerations.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.aLabelGenerations.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aLabelGenerations.ForeColor = System.Drawing.Color.SteelBlue;
-            this.aLabelGenerations.Location = new System.Drawing.Point(0, 566);
+            this.aLabelGenerations.Location = new System.Drawing.Point(0, 520);
             this.aLabelGenerations.Name = "aLabelGenerations";
             this.aLabelGenerations.Size = new System.Drawing.Size(94, 18);
             this.aLabelGenerations.TabIndex = 0;
             this.aLabelGenerations.Text = "Generations";
             // 
-            // aStripStatusSeed
-            // 
-            this.aStripStatusSeed.Name = "aStripStatusSeed";
-            this.aStripStatusSeed.Size = new System.Drawing.Size(32, 17);
-            this.aStripStatusSeed.Text = "Seed";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 655);
+            this.ClientSize = new System.Drawing.Size(675, 609);
             this.ContextMenuStrip = this.aContextMenuStrip;
             this.Controls.Add(this.aGraphicsPanel);
             this.Controls.Add(this.aToolStrip);
@@ -783,7 +795,6 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
@@ -848,6 +859,8 @@
         private System.Windows.Forms.ToolStripMenuItem fromCurrentSeedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fromNewSeedToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel aStripStatusSeed;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 
